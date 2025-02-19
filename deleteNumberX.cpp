@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <vector>
+#include <algorithm> // Необходимо подключить для std::remove
 
 int main() {
     // Объявляем переменную для размера вектора
@@ -22,8 +23,6 @@ int main() {
     std::cin >> x;
 
     // Удаляем все элементы, равные x
-    // Используем алгоритм std::erase_if (C++20 и новее) [1]
-    // Если у вас более старая версия C++, можно использовать цикл и std::vector::erase() [1][7]
     numbers.erase(std::remove(numbers.begin(), numbers.end(), x), numbers.end());
 
     // Выводим итоговое состояние вектора
