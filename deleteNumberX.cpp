@@ -1,34 +1,42 @@
 ﻿#include <iostream>
 #include <vector>
-#include <algorithm> // Необходимо подключить для std::remove
+
+void removeElement(std::vector<int>& vec, int x) {
+    for (size_t i = 0; i < vec.size(); ) {
+        if (vec[i] == x) {
+            // Если элемент равен x, сдвигаем все последующие элементы на одну позицию влево
+            for (size_t j = i; j < vec.size() - 1; ++j) {
+                vec[j] = vec[j + 1];
+            }
+            // Удаляем последний элемент с помощью pop_back()
+            vec.pop_back();
+            // Не увеличиваем i, чтобы проверить новый элемент на этой позиции
+        } else {
+            ++i; // Переходим к следующему элементу
+        }
+    }
+}
 
 int main() {
-    // Объявляем переменную для размера вектора
     int n;
     std::cout << "Input vector size: ";
     std::cin >> n;
 
-    // Объявляем вектор целых чисел
     std::vector<int> numbers(n);
-
-    // Заполняем вектор числами, введенными пользователем
     std::cout << "Input numbers: ";
     for (int i = 0; i < n; ++i) {
         std::cin >> numbers[i];
     }
 
-    // Объявляем переменную для числа, которое нужно удалить
     int x;
     std::cout << "Input number to delete: ";
     std::cin >> x;
 
-    // Удаляем все элементы, равные x
-    numbers.erase(std::remove(numbers.begin(), numbers.end(), x), numbers.end());
+    removeElement(numbers, x);
 
-    // Выводим итоговое состояние вектора
     std::cout << "Result: ";
-    for (int i = 0; i < numbers.size(); ++i) {
-        std::cout << numbers[i] << (i == numbers.size() - 1 ? "" : " ");
+    for (int num : numbers) {
+        std::cout << num << " ";
     }
     std::cout << std::endl;
 
